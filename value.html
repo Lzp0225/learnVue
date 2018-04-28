@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="css">
+			<input id="qw" type="text" v-model="sz" />
+			{{sz}}
+		</div>
+	</body>
+</html>
+<script>
+	var app = new Vue({
+		el:"#css",
+		data:{
+			sz:''
+		}
+	})
+</script>

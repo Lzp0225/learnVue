@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="example-6">
+		  <select v-model="selected" multiple style="width: 50px">
+		    <option>A</option>
+		    <option>B</option>
+		    <option>C</option>
+		  </select>
+		  <br>
+		  <span>Selected: {{ selected }}</span>
+		  <input @change="changeMsg" v-model.lazy="msg" placeholder="this is lazy" >                      <!--      使用了lazy就不会数据绑定了 只有在change事件里会改变数据-->
+		  <input v-model.number="age" type="number" placeholder="this is number" />         <!-- 使用了number就只能输入数字和...  字符串输入不了-->
+		  <span>'msg':{{msg2}}</span>
+		  <input v-model.trim="str" />         <!--使用trim 会过滤掉输入值的首位空白字符-->
+		  <input type="checkbox" id="checkbox" value="a" v-model="checked2">
+		  <input type="checkbox" id="checkbox1" value="a1" v-model="checked2">
+		  <label for="checkbox">{{ checked2 }}</label>
+		</div>
+		
+	</body>
+</html>
+<script type="text/javascript">
+	new Vue({
+	  el: '#example-6',
+	  data: {
+	    selected: [],
+	    checked2:[]   ,//为string的时候显示布尔值 为array的时候显示value
+	    msg:'',
+	    msg2:'',
+	    age:'',
+	    str:''
+	  },
+	  watch:{
+	  	str:function(){
+	  		var a = this.str;
+	  	}
+	  },
+	  methods:{
+	  	changeMsg:function(){
+	  		this.msg2 = this.msg;
+	  	}
+	  }
+	})
+</script>

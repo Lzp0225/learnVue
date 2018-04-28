@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<body>
+		<template id="loading-template">
+		    <div class="loading-overlay">
+		        <div class="sk-three-bounce">
+		            <div class="sk-child sk-bounce1">11</div>
+		            <div class="sk-child sk-bounce2">22</div>
+		            <div class="sk-child sk-bounce3">33</div>
+		        </div>
+		        <template id="aaa">
+					<div>
+						<div class="erer">
+							1111111111
+						</div>
+					</div>
+				</template>
+		    </div>
+		</template>
+		
+		<div id="help">
+			<button @click='toggle'>toggle</button>
+		    <loading></loading>
+		    <div class="zheli" v-if="showLoading">
+		    	<loading ><loading2></loading2></loading>
+		    </div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var help = new Vue({
+	    el: '#help',
+	    data: {
+	        showLoading: true
+	    },
+	    components: {
+	        'loading': {
+	            template: '#loading-template'
+	        },
+	        'loading2':{
+	        	template:'#aaa'
+	        }
+	    },
+	    methods:{
+	    	toggle:function(){
+	    		this.showLoading = !this.showLoading;
+	    	}
+	    }
+	})
+</script>

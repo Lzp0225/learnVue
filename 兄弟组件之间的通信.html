@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<first-component></first-component>
+			<second-component></second-component>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var app1 = new Vue();
+	var firstCom = {
+		template:'<span @click="send">{{f}}</span>',
+		data:function(){
+			return {
+				f:'我是第一个组件的数据'
+			}
+		},
+		methods:{
+			send:function(){
+				app1.$emit('fisrtFun',this.f);
+			}
+		},
+		created:function(){
+		}
+	}
+	var secondCom = {
+		template:'<span>{{s}}</span>',
+		data:function(){
+			return {
+				s:"我的第二个组件的数据"
+			}
+		},
+		created:function(){
+			app1.$on('fisrtFun',function(value){
+				alert('接收到：'+value);
+			});
+		}
+	}
+	var app = new Vue({
+		el:'#app',
+		data:{
+			all:"我的全局实例"
+		},
+		components:{
+			'firstComponent':firstCom,
+			'secondComponent':secondCom
+		}
+	})
+	
+</script>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+		<script type="text/javascript" src="js/vue.js"></script>
+		<style type="text/css">
+			*{
+				margin: 0;padding: 0;]
+			}
+			ul{
+				width: 50%;
+			}
+		</style>
+	</head>
+	<body >
+		<!--<div id="app">
+			<button @mouseover="isShowBtn" @mouseleave="isHideBtn">显示</button>
+			<ul v-show="isShow" @mouseover="isShowBtn1" @mouseleave="isHideBtn">
+				<li><a href="javascript:;">111</a></li>
+				<li><a href="javascript:;">2222</a></li>
+				<li><a href="javascript:;">333</a></li>
+			</ul>
+		</div>
+		<div id="app1">
+			<button @click.once="count+=1">增加</button> <!-- 点击事件将只会触发一次 -->
+			<!--<p>增加{{count}}</p>
+		</div>-->
+		
+		<div id="app2" style="height: 100%;width: 100%;">
+			<input type="text" @focus="textFocus" />
+			<button @click="countAdd">enter增加</button>
+			<p>增加{{count}}</p>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+//	new Vue({
+//		el:'#app',
+//		data:{
+//			isShow:false
+//		},
+//		methods:{
+//			isShowBtn:function(){
+//				this.isShow = true;
+//			},
+//			isHideBtn:function(){
+//				this.isShow = false;
+//			},
+//			isShowBtn1:function(){
+//				this.isShow = true;
+//			}
+//		}
+//	});
+//	new Vue({
+//		el:'#app1',
+//		data:{
+//			count:0
+//		}
+//	});
+	new Vue({
+		el:'#app2',
+		data:{
+			count:0
+		},
+		methods:{
+			textFocus:function(){
+				var that = this;
+				document.onkeydown=function(e){
+					if(e.keyCode==13){
+						that.countAdd();
+					}
+				}
+			},
+			countAdd:function(){
+				return this.count+=1;
+			}
+			
+		},
+		mounted:function(){
+			
+		}
+	})
+	
+</script>

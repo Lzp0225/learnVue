@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="counter-event-example">
+		  <p>{{ total }}</p>
+		  <button-counter v-on:increment="incrementTotal"></button-counter>   
+                  <!--
+                  	作者：18870877693@163.com
+                  	时间：2017-07-28
+                  	描述：v-on:increment="incrementTotal"    这个increment是自定义绑定的一个事件 ；
+                  	父组件可以在使用子组件的地方直接用 v-on 来监听子组件触发的事件。
+                  -->
+		  <button-counter v-on:increment="incrementTotal1"></button-counter>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	Vue.component('button-counter',{
+		template:'<button @click="incrementAA">{{counter}}</button>',
+		data:function(){
+			return{
+				counter:0
+			}
+		},
+		methods:{
+			incrementAA:function(){
+				this.counter++;
+				this.$emit('increment');   //$emit(eventName) 触发eventName这个事件     $on是监听事件   事件没触发的时候不能被监听
+			}
+		}
+	})
+	new Vue({
+		el:'#counter-event-example',
+		data:{
+			total:0
+		},
+		methods:{
+			incrementTotal:function(){
+				return this.total++;
+			},
+			incrementTotal1:function(){
+				return this.total--;
+			}
+		}
+	})
+</script>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="component">
+			<span>aaass</span>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	//先定义一个混入对象  里面包含组件选项
+	var myMixins = {
+		template:'<p>{{mixin}}---ssssdsd---{{name}}</p>',
+		data:function(){
+			return{
+				mixin:'我的混入数据的mixins 序号3',
+				mixin2:'我的混入数据的mixins2222  序号4'
+			}
+		},
+		methods:{
+			hello:function(){
+				alert("混入数据hello!!!!"); 
+			},
+			hi:function(){
+				alert("混入函数hi~")
+			}
+		},
+		created:function(){
+			//this.hello();
+		//	alert('混入钩子函数被调用了')
+		}
+	}
+	
+	//然后定义一个使用混入对象的组件
+	var components = Vue.extend({      //组件构造器 先构造一个组件对象  然后在最后注册组件
+		mixins:[myMixins],
+		data:function(){
+			return {             //不使用return包裹的数据会在项目的全局可见，会造成变量污染  ; 使用return包裹后数据中变量只在当前组件中生效，不会影响其他组件。
+				msg:'message  序号1',
+				mixin:"我是组件中的mixins 序号2"
+			}
+		},
+		methods:{
+			hello:function(){
+				alert("组件数据hello!!!!"); 
+			}
+		},
+		props:['name'], //props 里面的值就是父组件要传的那个数据名
+		created:function(){
+			/*var str = '';
+			for(var i in this.$data){
+				str += this.$data[i] + ' ; ';
+			}
+			alert(str);*/ //	当组件和混入对象含有同名选项时，这些选项将以恰当的方式混合。    数据发生冲突时 已组件内的数据优先
+			
+			//alert('组件钩子函数被调用了')  //同名钩子函数将混合为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用
+			this.hello();
+//			/值为对象的选项，例如 methods, components 和 directives，将被混合为同一个对象。两个对象键名冲突时，取组件对象的键值对。
+			this.hi();
+		}
+		/*template:'<p >{{msg}}!!----ssssdsd</p>',
+		data:function(){
+			return {
+				msg:'message'
+			}
+		},
+		methods:{
+			hello:function(){
+				alert("hello!!!!"); 
+			}
+		},
+		created:function(){
+			this.hello();
+		}*/
+	});
+	new components({propsData:{name:"我是注册时候传来的数据"}}).$mount('#component');   //这里可以在注册组件的时候可以传递参数
+	
+	
+
+</script>

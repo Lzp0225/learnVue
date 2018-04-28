@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">{{num}}</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var app = new Vue({
+		el:"#app",
+		data:{
+			num:0
+		},
+		computed:{
+			number(){
+				return this.num;
+			}
+		},
+		methods:{
+			time(){
+				setInterval(()=>{
+					app.num++
+				},1000)
+			}
+		},
+		mounted(){
+			this.time();
+		}
+	})
+	
+</script>

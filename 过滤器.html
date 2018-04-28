@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue.js_4_过滤器</title>
+		<meta name="keywords" content="过滤器管道标志：“ | ”">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="a1">
+			{{message | uppercase}}
+		</div>
+		<div id="a2">
+			{{message | uppercase}}
+		</div>
+		<div id="a3">
+			{{message | uppercase | lowercase}}
+			{{upperNumber | lowercase}}
+		</div>
+		<div id="a4">
+			<span style="background: red;">{{message | uppercase}}</span>
+			<input type="text" v-model="message" />    <!--等于号后面是属性值 冒号后面是添加的dom属性-->
+		</div>
+		
+		<div id="a5">
+			<ul>
+				<li v-for="item in products">{{item.name}}---打折前：{{item.price}}---“打<input type="text" v-model="count" />折”
+				
+				 <!--
+                	作者：18870877693@163.com
+                	时间：2017-07-04
+                	描述：filters可以传递参数
+                --> 
+				---打折后：{{item.price | discount(count)}}</li> 
+                                                                                                                                                                       
+			</ul>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+		Vue.filter('uppercase', function(value) {
+		  if (!value) { return ''}
+		  value = value.toString()
+		  return value.charAt(0).toUpperCase() + value.slice(1)});     //全局过滤器
+		var app1 = new Vue({
+			el:"#a1",
+			data:{
+				message:["abcd","gggg"]
+			}
+		})
+		var app2 = new Vue({
+			el:"#a2",
+			data:{
+				message:"asdadfdfdf"
+			}
+		})
+		
+		var app3 = new Vue({
+			el:"#a3",
+			data:{
+				message:"aazzzzzzzzzz",
+				upperNumber:"SSADSAD"
+			},
+			filters:{
+				uppercase:function(value){
+					if(!value) return '';
+					value = value.toString();
+					return value.slice(0).toUpperCase();    //在app3中的局部过滤器
+				},
+				lowercase:function(value){           //如果是串联的话  value先是前面那个结果 然后结果传到这里    如果是单个的数据就直接是value
+					if(!value) return '';
+					value = value.toString();
+					return value.slice(0).toLowerCase(); 
+				}
+			}
+		})
+		
+		var app4 = new Vue({
+			el:"#a4",
+			data:{
+				message:"asd,fsdfsdf,gsfgfd"
+			},
+			filters:{
+				uppercase:function(value){
+					if(!value) return ' ';
+					
+					value = value.toString();
+					return value.replace(/,/g,"").slice(0).toUpperCase();
+				}
+			}
+		})
+		var app5 = new Vue({
+			el:"#a5",
+			data:{
+				products:[
+					{name: 'microphone', price: 25, category: 'electronics'},
+                    {name: 'laptop case', price: 15, category: 'accessories'},
+                    {name: 'screen cleaner', price: 17, category: 'accessories'},
+                    {name: 'laptop charger', price: 70, category: 'electronics'},
+                    {name: 'mouse', price: 40, category: 'electronics'},
+                    {name: 'earphones', price: 20, category: 'electronics'},
+                    {name: 'monitor', price: 120, category: 'electronics'}
+				],
+				count:"2"
+			},
+			filters:{
+				discount:function(value,discount){   //可以接受参数
+					if(!value) return '';
+					value = JSON.parse(value);
+					discount = parseInt(discount);
+					return value*(discount/10);
+				}
+			}
+		})
+	/*	// 注册
+		Vue.filter('my-filter', function (value) {
+			debugger
+		// 返回处理后的值
+		})
+		// getter，返回已注册的过滤器
+		var myFilter = Vue.filter('my-filter')*/
+</script>

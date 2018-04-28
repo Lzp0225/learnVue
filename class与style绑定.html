@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue.js_6_</title>
+		<script type="text/javascript" src="js/vue.js"></script>
+		<style type="text/css">
+			.active{background: #ff0000;}
+			.active1{background: blueviolet;}
+			.active2{background: green;}
+			.activeasas3{background: yellow;}
+		</style>
+	</head>
+	<body>
+		<div id="a1" >
+			<span class="static" :sss="akl" :class="{active:isTrue,'active1':isTrue1}" v-if="isHide">1111111111111</span>           
+                                                                                                           <!--
+                                                                                                           	作者：18870877693@163.com
+                                                                                                           	时间：2017-07-05
+                                                                                                           	描述：v-bind的对象语法
+                                                                                                           -->
+			<span :class="classObj" v-show="isShow">22222222222222</span>
+			<br />
+			<button @click='toggle'>toggle</button>
+			<div :style="{color: 'red',background:'green'}">zzzzzzzzzz</div>
+			<div :style="styleObj">对象语法内联样式</div>
+			<div :style="[styleArr1,styleArr2]">数组语法内联样式</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	new Vue({
+		el:'#a1',
+		data:{
+			isTrue:false,
+			isTrue1:true,
+			akl:"sss",
+			classObj:{
+				active2:true,
+				'activeasas3':false
+			},
+			isHide:true,
+			isShow:false,
+			styleObj:{
+				color:'blue',
+				background:'#00a3e8'
+			},
+			styleArr1:{
+				color:'red'
+			},
+			styleArr2:{
+				background:'#00a3e8'
+			}
+		},
+		methods:{
+			toggle:function(){
+				this.isTrue = !this.isTrue;
+				this.isTrue1 = !this.isTrue1;
+				this.classObj.active2 = !this.classObj.active2;
+				this.classObj.activeasas3 = !this.classObj.activeasas3;       //对象后面可以添加任意属性
+				this.isShow = !this.isShow;
+				this.isHide = !this.isHide;
+			}
+		}
+	})
+</script>

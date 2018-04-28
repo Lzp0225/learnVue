@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<currency-input v-model="prices"></currency-input>
+		</div>
+		
+		<div id="check">
+			<my-checkbox ></my-checkbox>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	Vue.component('currency-input',{
+		template:'<span>$<input :value = "value" @input="updateValue($event.target.value)"/></span>',   //@ 就是on 也就是监听事件
+		props:['value'],   
+		methods:{
+			updateValue:function(value){
+				var val = value;
+			}
+		}
+	})
+	new Vue({
+		el:'#app',
+		data:{
+			prices:'aaa'
+		}
+	})
+	
+	Vue.component('my-checkbox',{
+		model:{
+			props:'checked',
+			event:'change'
+		},
+		props:{
+				
+		}
+	})
+	new Vue({
+		el:'#check'
+	})
+</script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="elem">
+			<anchored-heading :level="1"></anchored-heading>
+		</div>
+	</body>
+</html>
+<script>
+	Vue.component('anchored-heading', {
+	  render: function (createElement) {
+	    return createElement(
+	      'h' + this.level,   // tag name 标签名称
+	      this.$slots.default // 子组件中的阵列
+	    )
+	  },
+	  props: {
+	    level: {
+	      type: Number,
+	      required: true
+	    }
+	  }
+	})
+	new Vue({
+		el:"#elem"
+	})
+</script>

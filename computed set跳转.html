@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<span :style="'font-size:'+fontSize">被选中了{{tabValue}}</span>
+			<select v-model="tabLink">
+				<option value="nav1">百度</option>
+				<option value="nav2">京东</option>
+				<option value="nav3">淘宝</option>
+				<option value="nav4">天猫</option>
+			</select>
+		</div>
+	</body>
+</html>
+<script>
+	new Vue({
+		el:"#app",
+		data:{
+			fontSize:"18px",
+			tabValue:''
+		},
+		computed:{
+			tabLink:{
+				get:function(){
+					return this.tabValue;
+				},
+				set:function(val){
+					this.tabValue = val;
+					this.router(val)
+				}
+			}
+		},
+		methods:{
+			router:function(nav){
+				switch (nav) {
+		          case 'nav1':
+		            window.location.href = "http://www.baidu.com"
+		            break;
+		          case 'nav2':
+		            window.location.href = "http://www.jd.com"
+		            break;
+		          case 'nav3':
+		            window.location.href = "http://www.taobao.com"
+		            break;
+		          case 'nav4':
+		            window.location.href = "http://www.tmall.com"
+		            break;
+		        }
+			}
+		}
+	})
+</script>

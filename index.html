@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue.js_1</title>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			var app = new Vue({    
+			  el: '#a1',    //app.$el
+			  data: {       //app._data
+			    message: 'Hello Vue!',
+			    tip:'提示:111'
+			  }
+			})
+			var app2 = new Vue({
+				 el: '#a2',
+			 	 data: {
+				    message: 'bind!!!!',
+				    tip:'提示:222',
+				    isTips:true
+			  	}
+			})
+			var app3 = new Vue({
+				 el: '#a3',
+			 	 data: {
+				   isShow:true,
+				   isShow1:false
+			  	},
+				  methods: {
+				    isTrue: function () {
+				      this.isShow = !this.isShow;
+				    },
+				    isTrue1: function () {
+				      this.isShow1 = !this.isShow1;
+				    }
+				  }
+			})
+			var app4 = new Vue({
+				el:'#a4',
+				data:{
+					arrList:[
+						{text1:'1111111',text2:'qqqq',text3:[{a:"1",b:"2"}]},
+						{text1:'22222222222',text2:'wwww'},
+						{text1:'3333333',text2:'eeee'},
+						{text1:'4444444444',text2:'rrrr'}
+					]
+				}
+			})
+			var app5 = new Vue({
+				el:'#a5',
+				data:{
+					message:"绑定的数据",
+					idName:"imIDname",
+					boolean:true,
+					boolean1:true,
+					id:"00001"
+				}
+			})
+			var app6 = new Vue({
+				el:'#a6',
+				data:{
+					message:"ok111",
+					message2:"no111",
+					url:"http://www.baidu.com",
+					number:12
+				}
+			})
+			var app7 = new Vue({
+				el:"#a7",
+				data:{
+					first1:"first1",
+					second2:"second2",
+					first2:"first2",
+					isTrue:false
+				},
+				methods:{
+					first:function(){
+						if(this.isTrue){
+							this.first1 ="first1" ;
+						}
+						else{
+							this.first1 = this.first2;
+						}
+						this.isTrue = !this.isTrue;
+					},
+					second:function(){
+						this.second2 = "second2";
+					}
+				}
+			})
+			
+		});
+				var isAAA = false;
+				var number1 = 0;
+				function isTrue(){
+					number1++;
+					isAAA = !isAAA;
+				}
+		</script>
+	</head>
+	<body>
+		<div id="a1" v-bind:title="tip">
+			{{tip}}{{message}}                          
+                                                        <!--
+                                                        	作者：18870877693@163.com
+                                                        	时间：2017-07-04
+                                                        	描述：这个{{}}就是Mustache语法，因为不能在html中写这个，所以要用v-bind绑定动态属性
+                                                        -->
+		</div>
+		<div id="a2">
+			<span v-bind:title="tip" >{{message}}</span>
+		</div>
+		<div id="a3"  >
+			<button v-on:click="isTrue">按一下</button>
+			<a v-on:mouseenter="isTrue1" v-on:mouseleave="isTrue1">鼠标经过一下</a>
+			<span v-if="isShow">看得到我了！</span>
+			<span v-if="isShow1">shubiao看得到我了！</span>
+		</div>
+		<div id="a4">
+			<ul>
+				<li v-for="item in arrList">{{item.text2}}</li>
+			</ul>
+		</div>
+		<div id="a5">
+			<p>{{message}}</p>
+			<input type="text" v-model='message' placeholder="asasa" />   <!--表单输入和应用状态之间的双向绑定-->
+			<button v-bind:id="idName">button</button>
+			<input type="checkbox" v-bind:disabled="boolean" v-bind:checked="boolean1" />  <!--这对布尔值的属性也有效 —— 如果条件被求值为 false 的话该属性会被移除：-->
+			<div v-bind:id="'list-' + id"></div>
+		</div>
+		<div id="a6">
+			<span>{{message?message:message2}}</span>    <!-- 只能写表达式 不能写语句 -->
+			<a v-bind:href="url">百度</a>
+			<span>number:{{number+1}}</span>    <!-- 这里只能写+1  不能写++  自加是语句 加一是表达式 -->
+		</div>
+		<div id="a7">
+			<button v-on:click="first">first</button>
+			<button v-on:click="second">second</button>
+			<div v-bind:id="first1">1111</div>
+		</div>
+		<button onclick="isTrue()">ssss</button>
+		<p id="append"></p>
+		
+		
+	</body>
+</html>

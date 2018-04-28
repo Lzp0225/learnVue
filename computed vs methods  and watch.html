@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue.js_5_computed计算属性</title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="a1">
+			<span>computed:{{reversedMessage}}</span>
+			<br/>
+			<span>methods:{{reversed(num1,num2)}}</span>
+			<input type="text" v-model="msg" />
+			{{newMsg}}
+		</div>
+		<div id="a2">
+			
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var app1 = new Vue({
+		el:"#a1",
+		data:{
+			message:Date.now(),
+			aaa:"abcd",
+			num1:2,
+			num2:5,
+			newMsg:'111111111'
+		},
+		computed:{
+			msg:{
+				get:function(){
+					return this.newMsg;
+				},
+				set:function(val){
+					this.newMsg = val;
+				}
+			},
+			reversedMessage:function(){
+				return  this.message;
+			}
+		},
+		methods:{
+			reversed:function(a,b){
+				return  a+b;
+			}
+		}
+	})
+</script>

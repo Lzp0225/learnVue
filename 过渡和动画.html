@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+		<style>
+			/*.fade-enter-active, .fade-leave-active {
+			  transition:all .3s ease;
+			}*/
+			.fade-enter-active{
+				animation: bounce 0.5s;
+			}
+			.fade-leave-active{
+				animation: bounce 0.5s reverse;
+			}
+			.fade-enter, .fade-leave-to{
+				/*这里一般为开始或者结束时的状态*/
+			}
+			@-webkit-keyframes bounce{
+				0%{
+					transform: scale(0);
+				}
+				50%{
+					transform: scale(1.5);
+				}
+				100%{
+					transform: scale(1);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<button @click="show=!show">toggle</button>
+			<br />
+			<br />
+			<transition name="fade">
+				<div v-if="show" style="width: 100px;">我是显示出来的</div>
+			</transition>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	new Vue({
+		el:"#app",
+		data:{
+			show:true
+		}
+	})
+</script>

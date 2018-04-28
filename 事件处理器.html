@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app1">
+			<button @click="count+=1">点击增加1</button>
+			<p>这个按钮点击了{{count}}次</p>
+			<button @click="addBtn">add+1</button>
+			
+		</div>
+		<div id="example-2">
+		  <!-- `greet` 是在下面定义的方法名 -->
+		  <button v-on:click="greet">Greet</button>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	new Vue({
+		el:'#app1',
+		data:{
+			count:0
+		},
+		methods:{
+			addBtn:function(){
+				return this.count++;    //加个return好一点  可以点一次销毁一次click事件  避免代码重复的垃圾；
+			}
+		}
+	})
+	var example2 = new Vue({
+		  el: '#example-2',
+		  data: {
+		    name: 'Vue.js'
+		  },
+		  // 在 `methods` 对象中定义方法
+		  methods: {
+		    greet: function (event) {
+		      // `this` 在方法里指当前 Vue 实例
+		      alert('Hello ' + this.name + '!')
+		      // `event` 是原生 DOM 事件
+		      if (event) {
+		        alert(event.target.tagName.toLowerCase())
+		      }
+		    }
+		  }
+		})
+		// 也可以用 JavaScript 直接调用方法
+		example2.greet() // -> 'Hello Vue.js!'
+</script>
